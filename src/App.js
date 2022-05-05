@@ -4,10 +4,8 @@ import Container from "./Layout/Container/Container";
 import SearchForm from "./components/SearchForm/SearchForm";
 import { useState } from "react";
 import ArticleContainer from "./components/Article/ArticleContainer";
-
 const fetchNews = async (filterStr) => {
   try {
-    //
     const res = await fetch(
       `https://newsapi.org/v2/${filterStr}apiKey=${process.env.REACT_APP_API_KEY}`,
       {
@@ -27,19 +25,24 @@ const App = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const getNews = async (useFilter, country, category, query) => {
+  const [isNoResults, setIsNoResults] = useState(false);
+  const getNews = async (useFilter, country, category, query, page = 1) => {
+    setError(false);
     setIsLoading(true);
     const filterStr = useFilter
       ? `top-headlines?${country ? `country=${country}&` : ""}${
           category ? `category=${category}&` : ""
         }${query ? `q=${query}&` : ""}`
-      : `top-headlines?language=en&`;
-    // console.log(
-    //   `https://newsapi.org/v2/${filterStr}apiKey=${process.env.REACT_APP_API_KEY}`
-    // );
-    const data = await fetchNews(filterStr);
-    console.log(data);
-    data ? setData(data) : setError(true);
+      : `top-headlines?language=en&page=${page}&`;
+    const reqdata = await fetchNews(filterStr);
+    if (!reqdata) {
+      setIsLoading(false);
+      setError(true);
+      return;
+    }
+    reqdata.articles.length > 0
+      ? setData(reqdata.articles)
+      : setIsNoResults(true);
     setIsLoading(false);
   };
 
@@ -53,7 +56,8 @@ const App = () => {
       <ArticleContainer
         error={error}
         loading={isLoading}
-        articles={data.articles}
+        articles={data}
+        noResults={isNoResults}
       />
     </div>
   );
