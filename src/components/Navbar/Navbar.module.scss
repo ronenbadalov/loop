@@ -1,0 +1,40 @@
+.nav {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  -webkit-box-shadow: 5px 5px 11px -10px rgba(0, 0, 0, 0.68);
+  box-shadow: 5px 5px 11px -10px rgba(0, 0, 0, 0.68);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.logoText {
+  margin-left: 0.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.logoTextHeader {
+  color: var(--main-color-blue);
+  font-size: 18pt;
+  font-weight: bold;
+}
+
+.logoTextDescription {
+  font-size: 10pt;
+}
+
+.share {
+  display: flex;
+  align-items: center;
+  color: var(--main-color-blue);
+  cursor: pointer;
+  & p {
+    margin: auto 1rem;
+  }
+}

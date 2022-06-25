@@ -1,0 +1,21 @@
+.SearchForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  row-gap: 1rem;
+}
+
+.filters {
+  display: grid;
+  width: 350px;
+  gap: 1rem;
+}
+
+@media (min-width: 1050px) {
+  .filters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    width: 1000px;
+  }
+}

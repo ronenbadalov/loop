@@ -1,0 +1,16 @@
+/* .comboBox {
+  margin: 1rem;
+  width: 200px;
+}
+
+@media screen and (max-width: 1000px) {
+  .comboBox {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 635px) {
+  .comboBox {
+    margin: 0.3rem auto;
+  }
+} */
